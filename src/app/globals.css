@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-background text-foreground;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%; /* Cor de fundo clara */
+    --foreground: 240 10% 3.9%; /* Cor de texto escura */
+  }
+
+  .dark {
+    --background: 240 10% 3.9%; /* Cor de fundo escura */
+    --foreground: 0 0% 98%; /* Cor de texto clara */
+  }
+}
