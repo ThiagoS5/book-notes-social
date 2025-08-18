@@ -1,11 +1,13 @@
-import { mockBooks } from '@/lib/mock-data'
+'use client'
+
 import { BookGrid } from '@/components/organisms/BookGrid'
 import { Button } from '@/components/atoms/Button'
 import { PlusCircle } from 'lucide-react'
 import { SearchModal } from '@/components/organisms/SearchModal'
+import { useBookshelf } from '@/context/BookshelfContext'
 
 export default function DashboardPage() {
-  const books = mockBooks
+  const { books } = useBookshelf()
   return (
     <div>
       <div className="flex justify-between items-center mb-8">

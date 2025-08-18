@@ -4,19 +4,22 @@ import { Book } from '@/types'
 import { Tag } from '@/components/atoms/Tag'
 
 interface BookCardProps {
-  book: Book
+  book: Book;
+  priority?: boolean
 }
 
-export function BookCard({ book }: BookCardProps) {
+export function BookCard({ book, priority = false }: BookCardProps) {
   return (
     <Link href={`/book/${book.id}`} className="block group">
       <div className="p-4 border rounded-lg hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
-        <div className="relative w-full h-56 mb-4">
+        <div className="relative w-full mb-4 aspect-w-2 aspect-h-3">
           <Image
-            src={book.coverUrl || 'https://via.placeholder.com/150x220.png?text=Capa'}
+            src={book.coverUrl || 'https://dummyimage.com/400x600/ccc/000.png&text=Capa'}
             alt={`Capa do livro ${book.title}`}
+            sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 23vw"
             fill
-            className="object-cover rounded-md"
+            className="object-contain rounded-md"
+            priority={priority}
           />
         </div>
         <div className="flex flex-col flex-grow">

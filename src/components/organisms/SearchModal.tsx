@@ -8,12 +8,15 @@ import { searchBooks } from '@/services/googleBooksService'
 import { Book } from '@/types'
 import { LoaderCircle, PlusCircle, X } from 'lucide-react'
 import Image from 'next/image'
+import { useBookshelf } from '@/context/BookshelfContext'
 
 export function SearchModal({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false)
   const [query, setQuery] = useState('')
   const [results, setResults] = useState<Book[]>([])
   const [isLoading, setIsLoading] = useState(false)
+
+  const { addBook } = useBookshelf()
 
   const handleSearch = async () => {
     if (!query.trim()) return
@@ -25,8 +28,8 @@ export function SearchModal({ children }: { children: React.ReactNode }) {
   }
 
   const handleAddBook = (book: Book) => {
-    console.log('Adicionando o livro:', book.title)
-    // Futuramente Supabase
+    addBook(book)
+      console.log('Adicionando o livro:', book.title)
     setIsOpen(false)
   }
 
@@ -66,10 +69,10 @@ export function SearchModal({ children }: { children: React.ReactNode }) {
                   <li key={book.id} className="flex items-center gap-4">
                     <div className="relative h-[75px] w-[50px] flex-shrink-0">
                       <Image
-                        src={book.coverUrl || 'https://via.placeholder.com/100x150.png?text=Capa'}
+                        src={book.coverUrl || 'https://dummyimage.com/100x150/ccc/000.png&text=Capa'}
                         alt={`Capa de ${book.title}`}
-                        fill
                         sizes="50px"
+                        fill
                         className="rounded object-cover"
                       />
                     </div>
