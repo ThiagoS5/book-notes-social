@@ -11,18 +11,20 @@ interface GoogleBookVolume {
   };
 }
 
+
+
 export async function searchBooks(query: string): Promise<Book[]> {
   if (!query) {
     return [];
   }
 
-  const apiKey = process.env.GOOGLE_BOOKS_API_KEY;
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_BOOKS_API_KEY;
   if (!apiKey) {
     console.error('API Key do Google Books não foi configurada.');
     throw new Error('API Key não configurada');
   }
 
-  const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&key=${apiKey}`;
+  const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&maxResults=20&langRestrict=pt-BR&orderBy=relevance&key=${apiKey}`;
 
   try {
     const response = await fetch(url);
@@ -31,6 +33,7 @@ export async function searchBooks(query: string): Promise<Book[]> {
     }
 
     const data = await response.json();
+    {console.log('Dados recebidos da API do Google Books:', data);}
     const items: GoogleBookVolume[] = data.items || [];
 
     const formattedBooks: Book[] = items.map(item => ({
