@@ -7,9 +7,9 @@ interface TagProps {
 }
 
 const statusStyles: Record<BookStatus, string> = {
-  'TO_READ': 'bg-blue-100 text-blue-800',
-  'READING': 'bg-yellow-100 text-yellow-800 animate-pulse',
-  'READ': 'bg-green-100 text-green-800',
+  'TO_READ': 'bg-secondary text-secondary-foreground',
+  'READING': 'bg-primary/20 text-primary animate-pulse',
+  'READ': 'bg-green-600/20 text-green-500'
 }
 
 const statusText: Record<BookStatus, string> = {
