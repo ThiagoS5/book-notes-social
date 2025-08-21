@@ -1,11 +1,14 @@
 import * as React from 'react'
 import { cn } from '@/lib/utils/twMerge'
+import type { FieldError } from 'react-hook-form'
 
 export interface TextareaProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+    error?: FieldError
+  }
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className, ...props }, ref) => {
+  ({ className, error, ...props }, ref) => {
     return (
       <textarea
         className={cn(

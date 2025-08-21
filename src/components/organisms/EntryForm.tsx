@@ -1,10 +1,15 @@
 'use client'
 
-import { useState } from 'react'
 import { useBookshelf } from '@/context/BookshelfContext'
 import { Input } from '@/components/atoms/Input'
 import { Textarea } from '@/components/atoms/Textarea'
 import { Button } from '@/components/atoms/Button'
+import { entrySchema, EntryFormData } from '@/lib/schemas'
+import { Controller, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { FormErrorMessage } from '@/components/atoms/FormErrorMessage'
+import { toast } from 'sonner'
+import { EmotionSelector } from '@/components/molecules/EmotionSelector'
 
 interface EntryFormProps {
   bookId: string
@@ -12,54 +17,68 @@ interface EntryFormProps {
 
 export function EntryForm({ bookId }: EntryFormProps) {
   const { addEntry } = useBookshelf()
-  const [comment, setComment] = useState('')
-  const [page, setPage] = useState('')
-  const [emotion, setEmotion] = useState('')
+  const { 
+    register, 
+    handleSubmit, 
+    formState: { errors },
+    reset,
+    control
+  } = useForm<EntryFormData>({
+    resolver: zodResolver(entrySchema),
+  })
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault()
-    if (!comment.trim()) return
-
+  const onSubmit = (data: EntryFormData) => {
+    console.log('Submitting form with data:', data)
     const newEntry = {
       id: crypto.randomUUID(),
       bookId,
-      comment: comment.trim(),
-      pageNumber: Number(page) || undefined,
-      emotion: emotion.trim() || undefined,
+      comment: data.comment,
+      pageNumber: data.pageNumber,
+      emotion: data.emotion || undefined,
       createdAt: new Date(),
       updatedAt: new Date(),
     }
 
     addEntry(newEntry)
-
-    setComment('')
-    setPage('')
-    setEmotion('')
+    toast.success('Anotação salva com sucesso!')
+    reset()
   }
 
   return (
-     <form onSubmit={handleSubmit} className="space-y-4 p-4 border rounded-lg bg-card text-card-foreground">
+     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 p-4 border rounded-lg bg-card text-card-foreground">
       <h3 className="font-semibold text-lg">Adicionar anotação</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Input
-          type="number"
-          placeholder="Página (opcional)"
-          value={page}
-          onChange={(e) => setPage(e.target.value)}
+        <div> 
+          <Input
+            type="number"
+            placeholder="Página"
+            {...register('pageNumber', { valueAsNumber: true })}
+            error={errors.pageNumber}
+          />
+          <FormErrorMessage>{errors.pageNumber?.message}</FormErrorMessage>
+        </div>
+        <div> 
+          <Controller
+          control={control}
+          name="emotion"
+          render={({ field }) => (
+            <EmotionSelector
+              value={field.value}
+              onValueChange={field.onChange}
+            />
+          )}
         />
-        <Input
-          type="text"
-          placeholder="Emoção (opcional)"
-          value={emotion}
-          onChange={(e) => setEmotion(e.target.value)}
+          <FormErrorMessage>{errors.emotion?.message}</FormErrorMessage>
+        </div>
+        </div>
+      <div>
+        <Textarea
+          placeholder="O que você está pensando sobre este livro?"
+          {...register('comment')}
+          error={errors.comment}
         />
+        <FormErrorMessage>{errors.comment?.message}</FormErrorMessage>
       </div>
-      <Textarea
-        placeholder="O que você está pensando sobre este livro? (obrigatório)"
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
-        required
-      />
       <Button type="submit">Salvar Anotação</Button>
     </form>
   )

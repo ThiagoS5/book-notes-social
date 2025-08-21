@@ -41,7 +41,7 @@ export default function BookDetailPage() {
   return (
     
     <div className="space-y-8">
-      <div className="flex flex-col md:flex-row gap-8 items-start">
+       <div className="flex flex-col items-center md:items-start md:flex-row gap-8">
         <div className="relative h-[330px] w-[220px] flex-shrink-0 mx-auto md:mx-0">
           <Image
             src={book.coverUrl || 'https://dummyimage.com/220x330/ccc/000.png&text=Capa'}

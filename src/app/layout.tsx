@@ -4,6 +4,7 @@ import './globals.css'
 import { cn } from '@/lib/utils/twMerge'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Lora, Source_Sans_3 } from 'next/font/google'
+import { Toaster } from '@/components/ui/sonner' 
 
 const lora = Lora({
   subsets: ['latin'],
@@ -38,6 +39,7 @@ export default function RootLayout({
           enableSystem
         >
             {children}
+            <Toaster />
         </ThemeProvider>
       </body>
     </html>

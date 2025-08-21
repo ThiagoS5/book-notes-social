@@ -21,7 +21,7 @@ export function EntryList({ entries }: EntryListProps) {
       <h3 className="font-semibold text-lg mt-6">Suas Anotações</h3>
       {entries.map(entry => (
         <div key={entry.id} className="p-4 border rounded-lg bg-card text-card-foreground">
-          <div className="flex items-center gap-4 text-sm text-slate-500 mb-2">
+          <div className="flex items-center gap-4 text-sm text-muted-foreground mb-2">
             {entry.pageNumber && <span>Página {entry.pageNumber}</span>}
             {entry.pageNumber && entry.emotion && <span>&bull;</span>}
             {entry.emotion && <span className="font-semibold">{entry.emotion}</span>}

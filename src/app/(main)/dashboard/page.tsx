@@ -9,9 +9,9 @@ import { useBookshelf } from '@/context/BookshelfContext'
 export default function DashboardPage() {
   const { books } = useBookshelf()
   return (
-    <div>
-      <div className="flex justify-between items-center mb-8">
-        <h2 className="text-3xl font-bold">Sua Estante</h2>
+    <div className="container mx-auto max-w-7xl">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
+        <h1 className="text-3xl font-bold font-serif">Sua Estante</h1>
           <SearchModal>
           <Button>
             <PlusCircle className="mr-2 h-4 w-4" />
