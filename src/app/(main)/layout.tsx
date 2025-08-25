@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react'
 import { Header } from '@/components/organisms/Header'
 import { Sidebar } from '@/components/organisms/Sidebar'
 import { BookshelfProvider } from '@/context/BookshelfContext'
 import { cn } from '@/lib/utils/twMerge'
+import { useState } from 'react'
 
 export default function MainLayout({
   children,
@@ -18,7 +18,9 @@ export default function MainLayout({
       <div
         className={cn(
           'grid min-h-screen w-full transition-[grid-template-columns] duration-300 ease-in-out',
-          isSidebarCollapsed ? 'md:grid-cols-[80px_1fr]' : 'md:grid-cols-[256px_1fr]'
+          isSidebarCollapsed
+            ? 'md:grid-cols-[80px_1fr]'
+            : 'md:grid-cols-[256px_1fr]',
         )}
       >
         <Sidebar
@@ -27,7 +29,7 @@ export default function MainLayout({
         />
         <div
           className={cn(
-            'flex flex-col flex-grow transition-all duration-300 ease-in-out'
+            'flex flex-col flex-grow transition-all duration-300 ease-in-out',
           )}
         >
           <Header />

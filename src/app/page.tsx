@@ -10,7 +10,8 @@ export default function RootPage() {
         <h1 className="text-5xl font-bold">Diário de Leitura</h1>
       </div>
       <p className="mb-8 text-lg text-gray-700 max-w-md">
-        Acompanhe suas leituras, registre seus pensamentos e veja sua jornada literária ganhar vida.
+        Acompanhe suas leituras, registre seus pensamentos e veja sua jornada
+        literária ganhar vida.
       </p>
       <Button asChild size="lg">
         <Link href="/dashboard">Entrar na minha estante</Link>

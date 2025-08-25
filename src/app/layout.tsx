@@ -1,10 +1,10 @@
+/* eslint-disable camelcase */
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Lora, Source_Sans_3 } from 'next/font/google'
 import './globals.css'
 import { cn } from '@/lib/utils/twMerge'
 import { ThemeProvider } from '@/components/theme-provider'
-import { Lora, Source_Sans_3 } from 'next/font/google'
-import { Toaster } from '@/components/ui/sonner' 
+import { Toaster } from '@/components/ui/sonner'
 
 const lora = Lora({
   subsets: ['latin'],
@@ -17,8 +17,6 @@ const sourceSans = Source_Sans_3({
   variable: '--font-source-sans',
   display: 'swap',
 })
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Diário de Leitura',
@@ -33,13 +31,9 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <body className={cn('font-sans', lora.variable, sourceSans.variable)}>
-        <ThemeProvider  
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-        >
-            {children}
-            <Toaster />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

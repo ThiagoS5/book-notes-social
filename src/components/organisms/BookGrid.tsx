@@ -1,6 +1,6 @@
 'use client'
-import { Book } from '@/types'
 import { BookCard } from '@/components/molecules/BookCard'
+import { Book } from '@/types'
 
 interface BookGridProps {
   books: Book[]

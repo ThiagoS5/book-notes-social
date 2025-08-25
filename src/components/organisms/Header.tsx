@@ -8,10 +8,12 @@ export function Header() {
       <div className="flex justify-between items-center w-full">
         <MobileSidebar />
         <div className="flex-grow"></div>
-        <nav className="flex items-center gap-4">
+        <nav className="flex items-center gap-4" aria-label="Menu do Usuário">
           <ThemeToggle />
           <p>Olá, Thi!</p>
-          <Button variant="outline" size="sm">Sair</Button>
+          <Button variant="outline" size="sm">
+            Sair
+          </Button>
         </nav>
       </div>
     </header>
