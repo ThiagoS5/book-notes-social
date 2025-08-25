@@ -1,19 +1,13 @@
 'use client'
 
-import Link from 'next/link'
-import * as Dialog from '@radix-ui/react-dialog'
 import { Button } from '@/components/atoms/Button'
-import { Book, BookText, Home, BarChart3, User, X, Menu } from 'lucide-react'
-import { usePathname } from 'next/navigation'
+import { navLinks } from '@/lib/utils/constants'
 import { cn } from '@/lib/utils/twMerge'
+import * as Dialog from '@radix-ui/react-dialog'
+import { Book, Menu, X } from 'lucide-react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useState } from 'react'
-
-const navLinks = [
-  { href: '/dashboard', label: 'Minha Estante', icon: Home },
-  { href: '/stats', label: 'Estatísticas', icon: BarChart3 },
-  { href: '/notes', label: 'Anotações', icon: BookText },
-  { href: '/profile', label: 'Perfil', icon: User },
-]
 
 export function MobileSidebar() {
   const pathname = usePathname()
@@ -22,7 +16,9 @@ export function MobileSidebar() {
   return (
     <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
       <Dialog.Trigger asChild>
-        <Button variant="outline" size="sm" className="md:hidden"> {/* Só aparece em telas pequenas */}
+        <Button variant="outline" size="sm" className="md:hidden">
+          {' '}
+          {/* Só aparece em telas pequenas */}
           <Menu className="h-5 w-5" />
           <span className="sr-only">Abrir Menu</span>
         </Button>
@@ -33,7 +29,9 @@ export function MobileSidebar() {
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-2">
               <Book className="text-primary" />
-              <Dialog.Title className="font-bold text-xl font-serif">Diário de Leitura</Dialog.Title>
+              <Dialog.Title className="font-bold text-xl font-serif">
+                Diário de Leitura
+              </Dialog.Title>
             </div>
             <Dialog.Close asChild>
               <Button variant="outline" size="sm">
@@ -43,7 +41,7 @@ export function MobileSidebar() {
             </Dialog.Close>
           </div>
           <nav className="flex flex-col gap-2">
-            {navLinks.map(link => {
+            {navLinks.map((link) => {
               const isActive = pathname === link.href
               return (
                 <Link
@@ -54,7 +52,7 @@ export function MobileSidebar() {
                     'flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors',
                     isActive
                       ? 'bg-primary text-primary-foreground'
-                      : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+                      : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground',
                   )}
                 >
                   <link.icon className="h-4 w-4" />

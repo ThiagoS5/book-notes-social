@@ -1,14 +1,14 @@
 'use client'
 
-import { useState } from 'react'
-import * as Dialog from '@radix-ui/react-dialog'
 import { Button } from '@/components/atoms/Button'
 import { Input } from '@/components/atoms/Input'
+import { useBookshelf } from '@/context/BookshelfContext'
 import { searchBooks } from '@/services/googleBooksService'
 import { Book } from '@/types'
+import * as Dialog from '@radix-ui/react-dialog'
 import { LoaderCircle, PlusCircle, X } from 'lucide-react'
 import Image from 'next/image'
-import { useBookshelf } from '@/context/BookshelfContext'
+import { useState, type SetStateAction } from 'react'
 
 export function SearchModal({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -29,15 +29,12 @@ export function SearchModal({ children }: { children: React.ReactNode }) {
 
   const handleAddBook = (book: Book) => {
     addBook(book)
-      console.log('Adicionando o livro:', book.title)
     setIsOpen(false)
   }
 
   return (
     <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
-      <Dialog.Trigger asChild>
-        {children}
-      </Dialog.Trigger>
+      <Dialog.Trigger asChild>{children}</Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="bg-black/60 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0" />
         <Dialog.Content className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-2xl max-h-[85vh] bg-card text-card-foreground rounded-md p-6 shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] flex flex-col">
@@ -53,8 +50,12 @@ export function SearchModal({ children }: { children: React.ReactNode }) {
               type="text"
               placeholder="Ex: Duna, Frank Herbert..."
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+              onChange={(e: { target: { value: SetStateAction<string> } }) =>
+                setQuery(e.target.value)
+              }
+              onKeyDown={(e: { key: string }) =>
+                e.key === 'Enter' && handleSearch()
+              }
               className="flex-grow"
             />
             <Button onClick={handleSearch} disabled={isLoading}>
@@ -69,7 +70,10 @@ export function SearchModal({ children }: { children: React.ReactNode }) {
                   <li key={book.id} className="flex items-center gap-4">
                     <div className="relative h-[75px] w-[50px] flex-shrink-0">
                       <Image
-                        src={book.coverUrl || 'https://dummyimage.com/100x150/ccc/000.png&text=Capa'}
+                        src={
+                          book.coverUrl ||
+                          'https://dummyimage.com/100x150/ccc/000.png&text=Capa'
+                        }
                         alt={`Capa de ${book.title}`}
                         sizes="50px"
                         fill
@@ -80,7 +84,11 @@ export function SearchModal({ children }: { children: React.ReactNode }) {
                       <p className="font-semibold">{book.title}</p>
                       <p className="text-sm text-gray-500">{book.author}</p>
                     </div>
-                    <Button variant="outline" size="sm" onClick={() => handleAddBook(book)}>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleAddBook(book)}
+                    >
                       <PlusCircle className="h-4 w-4 mr-2" />
                       Adicionar
                     </Button>
@@ -88,7 +96,7 @@ export function SearchModal({ children }: { children: React.ReactNode }) {
                 ))}
               </ul>
             )}
-             {!isLoading && results.length === 0 && (
+            {!isLoading && results.length === 0 && (
               <div className="text-center text-gray-500 py-10">
                 <p>Nenhum resultado para exibir.</p>
                 <p className="text-xs">Comece uma nova busca.</p>

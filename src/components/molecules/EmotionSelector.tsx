@@ -1,8 +1,8 @@
 'use client'
 
-import * as Select from '@radix-ui/react-select'
-import { ChevronDown, ChevronUp } from 'lucide-react'
 import { cn } from '@/lib/utils/twMerge'
+import * as Select from '@radix-ui/react-select'
+import { ChevronDown } from 'lucide-react'
 
 const emotions = [
   { value: '🤩 Animado', label: '🤩 Animado' },
@@ -21,17 +21,23 @@ const emotions = [
 interface EmotionSelectorProps {
   value?: string
   onValueChange: (value: string) => void
+  id?: string
 }
 
-export function EmotionSelector({ value, onValueChange }: EmotionSelectorProps) {
+export function EmotionSelector({
+  value,
+  onValueChange,
+  id,
+}: EmotionSelectorProps) {
   return (
     <div>
       <Select.Root value={value} onValueChange={onValueChange}>
-        <Select.Trigger 
+        <Select.Trigger
+          id={id}
           className={cn(
             'flex w-full items-center justify-between rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background',
             'placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
-            'disabled:cursor-not-allowed disabled:opacity-50'
+            'disabled:cursor-not-allowed disabled:opacity-50',
           )}
         >
           <Select.Value placeholder="Como você se sente neste capitulo?" />
@@ -40,7 +46,7 @@ export function EmotionSelector({ value, onValueChange }: EmotionSelectorProps) 
           </Select.Icon>
         </Select.Trigger>
         <Select.Portal>
-          <Select.Content 
+          <Select.Content
             className="relative z-50 min-w-[8rem] overflow-hidden rounded-md border bg-card text-card-foreground shadow-md animate-in fade-in-80"
             position="popper"
             sideOffset={4}

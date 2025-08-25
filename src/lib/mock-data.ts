@@ -1,5 +1,4 @@
-import { Book, Entry
-} from '@/types'
+import { Book, Entry } from '@/types'
 
 export const mockBooks: Book[] = [
   {
@@ -7,7 +6,7 @@ export const mockBooks: Book[] = [
     title: 'A Guerra dos Tronos',
     author: 'George R. R. Martin',
     status: 'READING',
-    coverUrl: 'https://via.placeholder.com/150x220.png?text=GOT', 
+    coverUrl: 'https://via.placeholder.com/150x220.png?text=GOT',
   },
   {
     id: '2',
@@ -31,7 +30,7 @@ export const mockEntries: Entry[] = [
     pageNumber: 62,
     emotion: 'Chocado',
     comment: 'Não acredito que o Ned Stark já...',
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
 ]

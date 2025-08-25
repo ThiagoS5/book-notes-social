@@ -1,52 +1,51 @@
-import { Book, BookStatus } from '@/types';
+import { Book } from '@/types'
 
 interface GoogleBookVolume {
-  id: string;
+  id: string
   volumeInfo: {
-    title: string;
-    authors?: string[];
+    title: string
+    authors?: string[]
     imageLinks?: {
-      thumbnail?: string;
-    };
-  };
+      thumbnail?: string
+    }
+  }
 }
-
-
 
 export async function searchBooks(query: string): Promise<Book[]> {
   if (!query) {
-    return [];
+    return []
   }
 
-  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_BOOKS_API_KEY;
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_BOOKS_API_KEY
   if (!apiKey) {
-    console.error('API Key do Google Books não foi configurada.');
-    throw new Error('API Key não configurada');
+    console.error('API Key do Google Books não foi configurada.')
+    throw new Error('API Key não configurada')
   }
 
-  const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&maxResults=20&langRestrict=pt-BR&orderBy=relevance&key=${apiKey}`;
+  const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&maxResults=20&langRestrict=pt-BR&orderBy=relevance&key=${apiKey}`
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url)
     if (!response.ok) {
-      throw new Error('Falha ao buscar livros');
+      throw new Error('Falha ao buscar livros')
     }
 
-    const data = await response.json();
-    {console.log('Dados recebidos da API do Google Books:', data);}
-    const items: GoogleBookVolume[] = data.items || [];
+    const data = await response.json()
+    const items: GoogleBookVolume[] = data.items || []
 
-    const formattedBooks: Book[] = items.map(item => ({
+    const formattedBooks: Book[] = items.map((item) => ({
       id: item.id,
       title: item.volumeInfo.title,
-      author: item.volumeInfo.authors ? item.volumeInfo.authors.join(', ') : 'Autor desconhecido',
+      author: item.volumeInfo.authors
+        ? item.volumeInfo.authors.join(', ')
+        : 'Autor desconhecido',
       coverUrl: item.volumeInfo.imageLinks?.thumbnail,
-      status: 'TO_READ', 
-    }));
+      status: 'TO_READ',
+    }))
 
-    return formattedBooks;
+    return formattedBooks
   } catch (error) {
-    console.error('Erro ao buscar na API do Google Books:', error);
-    return [];
+    console.error('Erro ao buscar na API do Google Books:', error)
+    throw error
   }
 }
