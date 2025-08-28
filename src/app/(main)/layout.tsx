@@ -3,7 +3,7 @@
 import { Header } from '@/components/organisms/Header'
 import { Sidebar } from '@/components/organisms/Sidebar'
 import { BookshelfProvider } from '@/context/BookshelfContext'
-import { cn } from '@/lib/utils/twMerge'
+import { cn } from '@/utils/twMerge'
 import { useState } from 'react'
 
 export default function MainLayout({

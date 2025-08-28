@@ -1,5 +1,5 @@
-import { cn } from '@/lib/utils/twMerge'
 import { BookStatus } from '@/types'
+import { cn } from '@/utils/twMerge'
 
 interface TagProps {
   status: BookStatus

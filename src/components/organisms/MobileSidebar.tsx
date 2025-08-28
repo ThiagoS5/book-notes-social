@@ -1,8 +1,8 @@
 'use client'
 
 import { Button } from '@/components/atoms/Button'
-import { navLinks } from '@/lib/utils/constants'
-import { cn } from '@/lib/utils/twMerge'
+import { navLinks } from '@/utils/constants'
+import { cn } from '@/utils/twMerge'
 import * as Dialog from '@radix-ui/react-dialog'
 import { Book, Menu, X } from 'lucide-react'
 import Link from 'next/link'

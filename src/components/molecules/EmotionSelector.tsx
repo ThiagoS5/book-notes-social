@@ -1,6 +1,6 @@
 'use client'
 
-import { cn } from '@/lib/utils/twMerge'
+import { cn } from '@/utils/twMerge'
 import * as Select from '@radix-ui/react-select'
 import { ChevronDown } from 'lucide-react'
 

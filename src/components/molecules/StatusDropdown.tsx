@@ -2,8 +2,8 @@
 
 import { Tag } from '@/components/atoms/Tag'
 import { useBookshelf } from '@/context/BookshelfContext'
-import { statusText } from '@/lib/utils/constants'
 import { Book, BookStatus } from '@/types'
+import { statusText } from '@/utils/constants'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import { Check, ChevronDown } from 'lucide-react'
 

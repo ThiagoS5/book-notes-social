@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils/twMerge'
+import { cn } from '@/utils/twMerge'
 import * as React from 'react'
 import type { FieldError } from 'react-hook-form'
 

@@ -1,7 +1,7 @@
 'use client'
 
-import { navLinks } from '@/lib/utils/constants'
-import { cn } from '@/lib/utils/twMerge'
+import { navLinks } from '@/utils/constants'
+import { cn } from '@/utils/twMerge'
 import { Book, ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'

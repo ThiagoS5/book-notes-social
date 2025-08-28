@@ -1,7 +1,7 @@
 'use client'
 
-import { statusText } from '@/lib/utils/constants'
 import { Book, BookStatus, Entry } from '@/types'
+import { statusText } from '@/utils/constants'
 import {
   createContext,
   ReactNode,

@@ -3,17 +3,13 @@ import { ReactNode } from 'react'
 
 interface FormErrorMessageProps {
   children: ReactNode
-  id?: string
 }
 
-export function FormErrorMessage({ children, id }: FormErrorMessageProps) {
+export function FormErrorMessage({ children }: FormErrorMessageProps) {
   if (!children) return null
 
   return (
-    <p
-      id={id}
-      className="flex items-center gap-1 text-xs font-medium text-red-500 mt-1"
-    >
+    <p className="flex items-center gap-1 text-xs font-medium text-red-500 mt-1">
       <AlertCircle className="h-3 w-3" />
       {children}
     </p>

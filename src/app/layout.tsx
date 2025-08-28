@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
+import { ThemeProvider } from '@/components/theme-provider'
+import { Toaster } from '@/components/ui/sonner'
+import { cn } from '@/utils/twMerge'
 import type { Metadata } from 'next'
 import { Lora, Source_Sans_3 } from 'next/font/google'
 import './globals.css'
-import { cn } from '@/lib/utils/twMerge'
-import { ThemeProvider } from '@/components/theme-provider'
-import { Toaster } from '@/components/ui/sonner'
 
 const lora = Lora({
   subsets: ['latin'],
